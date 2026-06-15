@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tbjfs-e_iclk#t+rvt=43rwu_%d#h-6!z7g7j_h7q@iu_)t90*'
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-tbjfs-e_iclk#t+rvt=43rwu_%d#h-6!z7g7j_h7q@iu_)t90*')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -56,11 +56,11 @@ ROOT_URLCONF = 'attachment_task.urls'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'student_db',
-        'USER': 'postgres',
-        'PASSWORD': 'playback009',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'student_db'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'playback009'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
